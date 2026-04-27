@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# md_blog_maker
 
-## Getting Started
+Next.js App Router로 마크다운을 정적 블로그로 렌더링합니다. [DESIGN.md](./DESIGN.md)의 토큰(다크 캔버스, 일렉트릭 옐로)을 UI에 반영합니다.
 
-First, run the development server:
+## 콘텐츠 규칙
+
+- **경로**: `content/<주제>/YYYY-MM-DD_슬러그.md`  
+  - 한 단계의 주제 폴더만 사용합니다.  
+  - 예: `content/react/2025-04-27_hello-world.md`
+- **파일명**: `YYYY-MM-DD_제목-슬러그.md` 형식이어야 합니다. (날짜는 `YYYY-MM-DD` 고정)
+- **URL**: `/<주제>/<파일이름(확장자 제외)>`  
+  - 예: `/react/2025-04-27_hello-world`
+- **Frontmatter(선택)**: `title`, `description`, `tags` — 없으면 제목은 파일의 슬러그에서 유추됩니다.
+
+잘못된 파일명은 빌드 시 **경고로 건너뛰며**, 한 주제·한 키(`날짜_슬러그`)당 글은 하나로 가정합니다.
+
+## 개발
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<http://localhost:3000> 에서 확인합니다.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 빌드
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run start
+```
 
-## Learn More
+## Vercel 배포
 
-To learn more about Next.js, take a look at the following resources:
+1. GitHub에 이 저장소를 푸시합니다.
+2. [Vercel](https://vercel.com)에서 **Add New… → Project**로 해당 저장소를 import합니다.
+3. Framework: **Next.js** (기본), Build: `next build`, Output: 기본값 그대로입니다.
+4. `content/` 아래 마크다운이 저장소에 포함되면, 배포 빌드 시 동일하게 SSG 페이지가 생성됩니다.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+추가 환경 변수는 필수는 아닙니다.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 스택
 
-## Deploy on Vercel
+- Next.js 16, React 19, TypeScript, Tailwind CSS v4  
+- `gray-matter`, `react-markdown`, `remark-gfm`, `rehype-highlight`, `fast-glob`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 라이선스
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT (필요 시 프로젝트에 맞게 수정)
