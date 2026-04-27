@@ -1,5 +1,5 @@
 ---
-title: "마크다운 기능 샘플"
+title: "기웃 기능 샘플"
 description: "표, 인용문, 체크리스트(remark-gfm) 등을 시험합니다."
 tags:
   - markdown
