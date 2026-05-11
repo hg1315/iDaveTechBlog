@@ -8,7 +8,7 @@ import "./globals.css";
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
   display: "swap",
 });
 
@@ -19,14 +19,14 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-const siteTitle = "md_blog_maker";
+const siteTitle = "iDaveBlog";
 
 export const metadata: Metadata = {
   title: {
     default: siteTitle,
     template: `%s · ${siteTitle}`,
   },
-  description: "프로젝트 폴더의 마크다운을 정적 블로그로 렌더링합니다.",
+  description: "Dave의 기술 블로그. 마크다운으로 관리하는 정적 블로그.",
 };
 
 export default async function RootLayout({
@@ -35,15 +35,14 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const topics = getAllTopics();
-
   return (
     <html
       className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
       lang="ko"
     >
-      <body className="flex min-h-full flex-col font-sans">
+      <body className="flex min-h-full flex-col bg-[#fafaf9] font-sans text-[#0c0a09]">
         <SiteHeader siteTitle={siteTitle} topics={topics} />
-        <main className="flex-1 bg-canvas">{children}</main>
+        <main className="flex-1 bg-[#fafaf9]">{children}</main>
         <SiteFooter />
       </body>
     </html>
